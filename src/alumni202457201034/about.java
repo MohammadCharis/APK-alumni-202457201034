@@ -1,18 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package alumni202457201034;
 
-/**
- *
- * @author LENOVO
- */
+
 public class about extends javax.swing.JPanel {
 
-    /**
-     * Creates new form guru
-     */
+   
     public about() {
         initComponents();
     }
@@ -112,6 +103,9 @@ public class about extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        removeAll();
+        repaint();
+        revalidate();
     }//GEN-LAST:event_jButton3ActionPerformed
 
 

@@ -4,10 +4,16 @@
  */
 package alumni202457201034;
 
+import java.awt.Color;
+
 /**
  *
  * @author LENOVO
  */
-class Int {
+class mdasbor {
+
+    static void setBackground(Color color) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

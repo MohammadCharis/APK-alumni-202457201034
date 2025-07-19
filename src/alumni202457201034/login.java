@@ -5,6 +5,12 @@
 package alumni202457201034;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -32,7 +38,7 @@ public class login extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         tfUsername = new javax.swing.JTextField();
-        pfPassword = new javax.swing.JPasswordField();
+        tpPassword = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -52,7 +58,7 @@ public class login extends javax.swing.JFrame {
             }
         });
 
-        pfPassword.setBorder(null);
+        tpPassword.setBorder(null);
 
         btnLogin.setBackground(new java.awt.Color(0, 0, 255));
         btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -92,7 +98,7 @@ public class login extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(tfUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
-                        .addComponent(pfPassword)
+                        .addComponent(tpPassword)
                         .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(50, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -119,7 +125,7 @@ public class login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tpPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -156,7 +162,44 @@ public class login extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        new dashboard().setVisible(true);
+        
+        // 
+        String username = tfUsername.getText();
+        
+        String password  = tpPassword.getText();
+        
+        
+    if (username.length()!= 0 && password.length()!=0) {
+        
+         try {
+            String sql = "SELECT * FROM user WHERE username=? AND password=md5 (?)";
+            
+            Connection con = koneksi.konek();
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setString(1, username);
+            
+            ps.setString(2, password);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                dispose();
+                
+                new dashboard().setVisible(true);
+            } else {
+                
+                JOptionPane.showMessageDialog (null, "Username/password salah");
+            }
+        } catch (SQLException sQLException) {
+            JOptionPane.showMessageDialog(null, sQLException.getMessage());
+        }
+            
+    }else {
+        JOptionPane.showMessageDialog(null, "Username?password tidak boleh kosong");
+    }    
+        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
@@ -190,7 +233,7 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbClose;
-    private javax.swing.JPasswordField pfPassword;
     private javax.swing.JTextField tfUsername;
+    private javax.swing.JPasswordField tpPassword;
     // End of variables declaration//GEN-END:variables
 }

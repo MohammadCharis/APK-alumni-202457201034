@@ -4,6 +4,11 @@
  */
 package alumni202457201034;
 
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+
 /**
  *
  * @author LENOVO
@@ -15,7 +20,65 @@ public class dasbor extends javax.swing.JPanel {
      */
     public dasbor() {
         initComponents();
+        isiJumlahDataDasbor();
+        
+        
     }
+    private void isiJumlahDataDasbor() {
+    // Membuka koneksi ke database
+    Connection conn = koneksi.konek();
+
+    try {
+        // Mengambil jumlah jurusan dari tabel jurusan
+        String sqlJurusan = "SELECT COUNT(*) AS jumlah FROM jurusan";
+        Statement psJurusan = conn.createStatement();
+        ResultSet rsJurusan = psJurusan.executeQuery(sqlJurusan);
+
+        // Jika hasil query ada, ambil dan tampilkan ke label jumlah jurusan
+        if (rsJurusan.next()) {
+            int jumlah = rsJurusan.getInt("jumlah");
+            tJumlahJurusan.setText(String.valueOf(jumlah));
+        }
+
+        // Mengambil jumlah guru dari tabel guru
+        String sqlGuru = "SELECT COUNT(*) AS jumlah FROM guru";
+        Statement psGuru = conn.createStatement();
+        ResultSet rsGuru = psGuru.executeQuery(sqlGuru);
+
+        // Jika hasil query ada, ambil dan tampilkan ke label jumlah guru
+        if (rsGuru.next()) {
+            int jumlah = rsGuru.getInt("jumlah");
+            tJumlahGuru.setText(String.valueOf(jumlah));
+        }
+
+        // Mengambil jumlah siswa dari tabel siswa
+        String sqlSiswa = "SELECT COUNT(*) AS jumlah FROM siswa";
+        Statement psSiswa = conn.createStatement();
+        ResultSet rsSiswa = psSiswa.executeQuery(sqlSiswa);
+
+        // Jika hasil query ada, ambil dan tampilkan ke label jumlah siswa
+        if (rsSiswa.next()) {
+            int jumlah = rsSiswa.getInt("jumlah");
+            tJumlahSiswa.setText(String.valueOf(jumlah));
+        }
+
+        // Mengambil jumlah kelas dari tabel kelas
+        String sqlKelas = "SELECT COUNT(*) AS jumlah FROM kelas";
+        Statement psKelas = conn.createStatement();
+        ResultSet rsKelas = psKelas.executeQuery(sqlKelas);
+
+        // Jika hasil query ada, ambil dan tampilkan ke label jumlah kelas
+        if (rsKelas.next()) {
+            int jumlah = rsKelas.getInt("jumlah");
+            tJumlahKelas.setText(String.valueOf(jumlah));
+        }
+
+    } catch (SQLException e) {
+        // Menampilkan pesan di konsol jika terjadi error saat mengambil data
+        System.err.println("Gagal mengambil jumlah data");
+    }
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,16 +91,16 @@ public class dasbor extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        tJumlahJurusan = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        tJumlahGuru = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        tJumlahSiswa = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        tJumlahKelas = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(244, 244, 244));
 
@@ -54,9 +117,9 @@ public class dasbor extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 60)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("3");
+        tJumlahJurusan.setFont(new java.awt.Font("Segoe UI", 1, 60)); // NOI18N
+        tJumlahJurusan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tJumlahJurusan.setText("3");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -65,7 +128,7 @@ public class dasbor extends javax.swing.JPanel {
             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tJumlahJurusan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -73,7 +136,7 @@ public class dasbor extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                .addComponent(tJumlahJurusan, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -90,9 +153,9 @@ public class dasbor extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 60)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("5");
+        tJumlahGuru.setFont(new java.awt.Font("Segoe UI", 1, 60)); // NOI18N
+        tJumlahGuru.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tJumlahGuru.setText("5");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -101,7 +164,7 @@ public class dasbor extends javax.swing.JPanel {
             .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tJumlahGuru, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -109,7 +172,7 @@ public class dasbor extends javax.swing.JPanel {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                .addComponent(tJumlahGuru, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -126,9 +189,9 @@ public class dasbor extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 60)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("300");
+        tJumlahSiswa.setFont(new java.awt.Font("Segoe UI", 1, 60)); // NOI18N
+        tJumlahSiswa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tJumlahSiswa.setText("300");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -137,7 +200,7 @@ public class dasbor extends javax.swing.JPanel {
             .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tJumlahSiswa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -145,7 +208,7 @@ public class dasbor extends javax.swing.JPanel {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                .addComponent(tJumlahSiswa, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -162,9 +225,9 @@ public class dasbor extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 60)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("10");
+        tJumlahKelas.setFont(new java.awt.Font("Segoe UI", 1, 60)); // NOI18N
+        tJumlahKelas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tJumlahKelas.setText("10");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -173,7 +236,7 @@ public class dasbor extends javax.swing.JPanel {
             .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tJumlahKelas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -181,7 +244,7 @@ public class dasbor extends javax.swing.JPanel {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                .addComponent(tJumlahKelas, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -213,10 +276,6 @@ public class dasbor extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -229,19 +288,23 @@ public class dasbor extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JLabel tJumlahGuru;
+    private javax.swing.JLabel tJumlahJurusan;
+    private javax.swing.JLabel tJumlahKelas;
+    private javax.swing.JLabel tJumlahSiswa;
     // End of variables declaration//GEN-END:variables
 }
