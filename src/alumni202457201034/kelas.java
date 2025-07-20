@@ -462,10 +462,8 @@ String NIP (String NamaGuru){
         String WaliKelas = NIP (cWali.getSelectedItem().toString());
         
         try {
-            String sql = "INSERT INTO kelas (id_kelas, nama_kelas, tingkatan, kode_jur,nip_wali_kelas) VALUES (?,?,?,?,?)";
-            
-            Connection conn=koneksi.konek();
-            
+            String sql = "INSERT INTO kelas (id_kelas, nama_kelas, tingkatan, kode_jur,nip_wali_kelas) VALUES (?,?,?,?,?)";            
+            Connection conn=koneksi.konek();           
             PreparedStatement statement = conn.prepareCall(sql);
             
             statement.setString(1, KodeKelas);
@@ -474,17 +472,13 @@ String NIP (String NamaGuru){
             statement.setString(4, Jurusan);
             statement.setString(5, WaliKelas);
             
-            statement.execute();
-            
-            JOptionPane.showMessageDialog(null, "Data berhasil disimpan!");
-            
+            statement.execute();           
+            JOptionPane.showMessageDialog(null, "Data berhasil disimpan!");           
         } catch (SQLException e) {
             
             JOptionPane.showMessageDialog(null, "Data gagal disimpan!\n" + e.getMessage());
-        }
-        
-        load_table_kelas();
-        
+        }       
+        load_table_kelas();       
         reset();
     }//GEN-LAST:event_btnTambahActionPerformed
 

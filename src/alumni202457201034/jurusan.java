@@ -22,13 +22,11 @@ public class jurusan extends javax.swing.JPanel {
         reset();
         load_tabel_jurusan();
     }
-    
     void reset(){
         tKodeJurusan.setText(null);
         tKodeJurusan.setEditable(true);
         tNamaJurusan.setText(null);
     }
-    
     void load_tabel_jurusan(){
         DefaultTableModel model = new DefaultTableModel();
         
@@ -47,15 +45,11 @@ public class jurusan extends javax.swing.JPanel {
                 String namaJurusan = rs.getString("nama_jurusan");
                 Object[] baris = {kodeJurusan, namaJurusan};
                 
-                model.addRow(baris);
-                
+                model.addRow(baris); 
             }
-            
         } catch (SQLException sQLException) {
             JOptionPane.showMessageDialog(null, "Gagal mengambil data1");
-            
         }
-        
         tblJurusan.setModel(model);
     }
     

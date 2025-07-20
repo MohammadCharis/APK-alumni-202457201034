@@ -59,7 +59,6 @@ public class guru extends javax.swing.JPanel {
         } catch (SQLException sQLException) {
             JOptionPane.showMessageDialog(null, "Gagal mengambil data1");
         }
-        
         tblGuru.setModel(model);
     }
 
@@ -339,9 +338,7 @@ public class guru extends javax.swing.JPanel {
             
             JOptionPane.showMessageDialog(null, "Data gagal disimpan!");
         }
-        
-        load_tabel_guru();
-        
+        load_tabel_guru(); 
         reset();
     }//GEN-LAST:event_btnTambahActionPerformed
 
@@ -378,9 +375,7 @@ public class guru extends javax.swing.JPanel {
             
             JOptionPane.showMessageDialog(null, "Data gagal diubah");
         }
-        
         load_tabel_guru();
-        
         reset();
     }//GEN-LAST:event_btnUbahActionPerformed
 
@@ -408,49 +403,43 @@ public class guru extends javax.swing.JPanel {
         // TODO add your handling code here:
         int barisYangDipilih = tblGuru.rowAtPoint(evt.getPoint());
 
-    String NIP = "";
-    String namaGuru = "";
-    String jenisKelamin = "";
-    String alamat = "";
+        String NIP = "";
+        String namaGuru = "";
+        String jenisKelamin = "";
+        String alamat = "";
+        // Cek dan ambil nilai kolom NIP
+        if (tblGuru.getValueAt(barisYangDipilih, 0) != null) {
+            NIP = tblGuru.getValueAt(barisYangDipilih, 0).toString();
+        }
+        // Cek dan ambil nilai kolom Nama Guru
+        if (tblGuru.getValueAt(barisYangDipilih, 1) != null) {
+            namaGuru = tblGuru.getValueAt(barisYangDipilih, 1).toString();
+        }
+        // Cek dan ambil nilai kolom Gander
+        if (tblGuru.getValueAt(barisYangDipilih, 2) != null) {
+            jenisKelamin = tblGuru.getValueAt(barisYangDipilih, 2).toString();
+        }
+        // Cek dan ambil nilai kolom Alamat
+        if (tblGuru.getValueAt(barisYangDipilih, 3) != null) {
+            alamat = tblGuru.getValueAt(barisYangDipilih, 3).toString();
+        }
+            tNIP.setText(NIP);
+            tNIP.setEditable(false);
+            tNamaGuru.setText(namaGuru);
+            tAlamat.setText(alamat);
 
-    // Cek dan ambil nilai kolom NIP
-    if (tblGuru.getValueAt(barisYangDipilih, 0) != null) {
-        NIP = tblGuru.getValueAt(barisYangDipilih, 0).toString();
-    }
+            switch (jenisKelamin) {
+            case "L":
+                cJenisKelamin.setSelectedItem("Laki - laki");
+                break;
+            case "P":
+                cJenisKelamin.setSelectedItem("Perempuan");
+                break;
+            default:
+                cJenisKelamin.setSelectedItem(null);
+                break;
+        }
 
-    // Cek dan ambil nilai kolom Nama Guru
-    if (tblGuru.getValueAt(barisYangDipilih, 1) != null) {
-        namaGuru = tblGuru.getValueAt(barisYangDipilih, 1).toString();
-    }
-
-    // Cek dan ambil nilai kolom Gander
-    if (tblGuru.getValueAt(barisYangDipilih, 2) != null) {
-        jenisKelamin = tblGuru.getValueAt(barisYangDipilih, 2).toString();
-    }
-
-    // Cek dan ambil nilai kolom Alamat
-    if (tblGuru.getValueAt(barisYangDipilih, 3) != null) {
-        alamat = tblGuru.getValueAt(barisYangDipilih, 3).toString();
-    }
-        
-       
-        tNIP.setText(NIP);
-        tNIP.setEditable(false);
-        tNamaGuru.setText(namaGuru);
-        tAlamat.setText(alamat);
-        
-        switch (jenisKelamin) {
-        case "L":
-            cJenisKelamin.setSelectedItem("Laki - laki");
-            break;
-        case "P":
-            cJenisKelamin.setSelectedItem("Perempuan");
-            break;
-        default:
-            cJenisKelamin.setSelectedItem(null);
-            break;
-    }
-        
     }//GEN-LAST:event_tblGuruMouseClicked
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
